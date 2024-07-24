@@ -1,6 +1,12 @@
 exports.RegisterPage = class RegisterPage{
     constructor(page){
         this.page = page
+        this.menu_switchto = page.getByRole('link', { name: 'SwitchTo' })
+        this.menu_iteractions = page.getByRole('link', { name: 'Interactions' })
+        this.submenu_frame = page.getByRole('link', { name: 'Frames' })
+        this.submenu_singleframe = page.getByRole('link', { name: 'Single Iframe' })
+        this.submenu_dragdrop = page.getByText('Drag and Drop')
+        this.submenu_static = page.getByRole('link', { name: 'Static' })
         this.username_textbox = page.getByLabel('Username')
         this.first_name = page.getByPlaceholder('First Name')
         this.last_name = page.getByPlaceholder('Last Name')
@@ -19,12 +25,16 @@ exports.RegisterPage = class RegisterPage{
         this.country_combobox = page.getByLabel('', { exact: true })
         this.country_tree = page.locator('input[type="search"]')
         this.ano_box = page.locator('#yearbox')
-        this.mes_box = page.getByPlaceholder('Month')
+        this.mes_box = page.locator('//*[@ng-model="monthbox"]')
         this.dia_box = page.locator('#daybox')
         this.primeiro_pass = page.locator('#firstpassword')
         this.segundo_pass = page.locator('#secondpassword')
         this.submit_btn = page.getByRole('button', { name: 'Submit' })
-
+        this.element_dragable = page.locator('#angular')
+        this.element_dropable = page.locator('#droparea')
+        this.text_insideframe = page.frameLocator('iframe[name="SingleFrame"]').getByRole('textbox')
+        this.text_ininsideframe = page.frameLocator('#Multiple >> internal:text="<p>Your browser does not"i').frameLocator('internal:text="<p>Your browser does not"i').getByRole('textbox')
+        this.iframeinframe_btn = page.getByRole('link', { name: 'Iframe with in an Iframe' })
     }
     async gotoRegisterPage(){
         await this.page.goto('https://demo.automationtesting.in/Register.html');
@@ -49,16 +59,33 @@ exports.RegisterPage = class RegisterPage{
         await this.skills_option.selectOption(skills);  
         await this.country_combobox.click();   
         await this.country_tree.fill(country);
-        await this.page.getByRole('treeitem', { name: country }).click();    
-        //await page.getByRole('treeitem', { name: 'Netherlands' }).click();
-
-    
-
+        await this.page.getByRole('treeitem', { name: country }).click();      
         await this.ano_box.selectOption(ano);
         await this.mes_box.selectOption(mes);
         await this.dia_box.selectOption(dia);
         await this.primeiro_pass.fill('123');
         await this.segundo_pass.fill('123');
         await this.submit_btn.click();
+    }
+    async navegarDragDrop(){
+        await this.menu_iteractions.click();
+        await this.submenu_dragdrop.click();
+        await this.submenu_static.click();
+    }
+    async navegarFrame(){
+        await this.menu_switchto.click();
+        await this.submenu_frame.click();
+        await this.submenu_singleframe.click();
+    }
+
+    async realizarDragDrop(){
+        await this.element_dragable.dragTo(this.element_dropable);
+        await this.element_dragable.dragTo(this.element_dropable);
+    }
+
+    async preencherTextosFrames(){
+        await this.text_insideframe.fill('testes');
+        await this.iframeinframe_btn.click();
+        await this.text_ininsideframe.fill('testes');
     }
 }
