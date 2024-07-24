@@ -80,7 +80,7 @@ exports.RegisterPage = class RegisterPage{
 
     async realizarDragDrop(){
         await this.element_dragable.dragTo(this.element_dropable);
-        await this.element_dragable.dragTo(this.element_dropable);
+        //await this.element_dragable.dragTo(this.element_dropable);
     }
 
     async preencherTextosFrames(){
