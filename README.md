@@ -66,3 +66,4 @@ test.skip()
 - Tags --grep "@smoke" (--grep-invert)
 - Page Objects
 - API Testing
+- Mobile Web Executions
