@@ -12,7 +12,6 @@ test.skip('test', async ({ page }) => {
   await page.close;
 });
 
-
 test('Register Teste', async ({page}) =>{
   const Register = new RegisterPage(page)
   await Register.gotoRegisterPage()
