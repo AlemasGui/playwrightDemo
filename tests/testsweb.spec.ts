@@ -24,6 +24,18 @@ test('DragAndDrop', async ({ page }) => {
   await DragDrop.realizarDragDrop()
 });
 
+[
+  { nome: 'Maria', sobrenome: 'Santos' },
+  { nome: 'João', sobrenome: 'Barbosa' },
+  { nome: 'Julia', sobrenome: 'Silva' },
+].forEach(({ nome, sobrenome }) => {
+  test(`Teste do(a) ${nome}`, async ({ page }) => {
+    const Register = new RegisterPage(page);
+    await Register.gotoRegisterPage();
+    await Register.preencherNomeCadastro(nome, sobrenome);
+  });
+});
+
 test.afterEach(async({page}) => {
   await page.close;
 })

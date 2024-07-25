@@ -62,6 +62,10 @@ exports.RegisterPage = class RegisterPage{
         await this.segundo_pass.fill('123');
         await this.submit_btn.click();
     }
+    async preencherNomeCadastro(nome,sobrenome){
+        await this.first_name.fill(nome);
+        await this.last_name.fill(sobrenome);
+    }
     async navegarDragDrop(){
         await this.menu_iteractions.click();
         await this.submenu_dragdrop.click();
