@@ -1,5 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { RegisterPage } from '../pages/register';
+import { FramePage } from '../pages/frame';
+import { DragDropPage } from '../pages/dragdrop';
 
 test.beforeEach(async({page})=>{
   const Register = new RegisterPage(page)
@@ -12,12 +14,14 @@ test('Register Teste', async ({page}) =>{
 test('FrameTest', async ({ page }) => {
   const Register = new RegisterPage(page)
   await Register.navegarFrame()
-  await Register.preencherTextosFrames()
+  const Frame = new FramePage(page)
+  await Frame.preencherTextosFrames()
 });
 test('DragAndDrop', async ({ page }) => {
   const Register = new RegisterPage(page)
+  const DragDrop = new DragDropPage(page)
   await Register.navegarDragDrop()
-  await Register.realizarDragDrop()
+  await DragDrop.realizarDragDrop()
 });
 
 test.afterEach(async({page}) => {

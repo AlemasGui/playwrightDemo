@@ -30,11 +30,6 @@ exports.RegisterPage = class RegisterPage{
         this.primeiro_pass = page.locator('#firstpassword')
         this.segundo_pass = page.locator('#secondpassword')
         this.submit_btn = page.getByRole('button', { name: 'Submit' })
-        this.element_dragable = page.locator('#angular')
-        this.element_dropable = page.locator('#droparea')
-        this.text_insideframe = page.frameLocator('iframe[name="SingleFrame"]').getByRole('textbox')
-        this.text_ininsideframe = page.frameLocator('#Multiple >> internal:text="<p>Your browser does not"i').frameLocator('internal:text="<p>Your browser does not"i').getByRole('textbox')
-        this.iframeinframe_btn = page.getByRole('link', { name: 'Iframe with in an Iframe' })
     }
     async gotoRegisterPage(){
         await this.page.goto('https://demo.automationtesting.in/Register.html');
@@ -76,16 +71,5 @@ exports.RegisterPage = class RegisterPage{
         await this.menu_switchto.click();
         await this.submenu_frame.click();
         await this.submenu_singleframe.click();
-    }
-
-    async realizarDragDrop(){
-        await this.element_dragable.dragTo(this.element_dropable);
-        //await this.element_dragable.dragTo(this.element_dropable);
-    }
-
-    async preencherTextosFrames(){
-        await this.text_insideframe.fill('testes');
-        await this.iframeinframe_btn.click();
-        await this.text_ininsideframe.fill('testes');
     }
 }
